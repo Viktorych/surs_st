@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-bg-color: #c7dcf5;
+}
+
+:root {
+    --main-title-color: #67f2cd;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.wrapper {
+
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 1600px;
+    height: 850px; // margin-left: auto;
+    background: #61e599;
+    border: 1px solid #141931;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px; //font: 14px/20px Arial, sans-serif;
+}
+
+.header {
+    position: absolute;
+    top: -10px;
+    height: 18px;
+    left: 10%;
+    right: 10%; //margin: 1px 1px 1px 1px;
+    background: #48dddd;
+    border: 1px solid #dffc00;
+    border-radius: 10px; //padding: 1px 1px 1px 1px;
+    text-align: center;
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 16px;
+
+}
+
+.data {
+    position: absolute;
+    top: 15px;
+    height: 820px;
+    left: 0;
+    width: 410px;
+    margin: 5px 5px 5px 5px;
+    background: var(--main-bg-color);
+    border: 1px solid #141931;
+    border-radius: 5px;
+    padding: 1px 1px 1px 1px;
+    text-align: center;
+}
+.graph {
+    position: absolute;
+    top: 15px;
+    height: 820px;
+    left: 420px;
+    right: 5px;
+    //width: 410px;
+    margin: 5px 5px 5px 5px;
+    background: var(--main-bg-color);
+    border: 1px solid #141931;
+    border-radius: 5px;
+    padding: 1px 1px 1px 1px;
+    text-align: center;
+}
+
+.footer {
+    position: absolute;
+    bottom: -25px;
+    height: 15px;
+    left: 10%;
+    right: 10%;
+    margin: 10px 10px 10px 10px;
+    background: var(--main-bg-color);
+    border: 1px solid #141931;
+    border-radius: 10px;
+    padding: 5px 5px 5px 5px;
+    text-align: center;
+}
+#return {
+    position: absolute;
+    top: -10px;
+    height: 20px;
+    left: 10px;
+    WIDTH: 90px; //right: 10%;
+    margin: 1px 1px 1px 1px;
+    background: #00ff0a;
+    border: 1px solid #311414;
+    border-radius: 5px;
+    padding: 1px 1px 1px 1px;
+    text-align: center;
+    font: 12 Arial, sans-serif;
+    border-radius: 50%;
+}

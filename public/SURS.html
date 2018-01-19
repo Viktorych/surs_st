@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title> SURS </title>
+
+    <link href="css/dygraph.css" rel="stylesheet">
+    <link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <link href="css/surs.css?ver=0.0.3" rel="stylesheet" type="text/css" />
+
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/jquery-ui.js" type="text/javascript"></script>
+
+    <script src="js/classes.js" type=" text/javascript "></script>
+    <script src="js/dygraph.js" type="text/javascript"></script>
+    <script src="js/synchronizer.js" type="text/javascript"></script>
+
+    <script src="js/R_F.js?ver=0.0.3" type="text/javascript"></script>
+    <script src="js/surs.js?ver=0.0.3" type="text/javascript"></script>
+
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="return"><a id="btn_return" href="Metall_Speed.html" title="На основную станицу.">Назад.</a></div>
+
+        <div class="header">СИМУЛЯЦИЯ РОЗЛИВА СТАЛИ НА СТАЛЕРАЗЛИВОЧНОЙ МАШИНЕ ЦЕМ. (!-- обновление CTRL + F5 --!)</div>
+        <div class="data">
+
+
+            <!-- .wrapper -->
+            <!-- <div class="input"> -->
+            <fieldset>
+                <LEGEND>Параметры плавки:</LEGEND>
+                <table cellspacing="1px" cellpadding="10" border="0" width="400">
+                    <tbody>
+                        <tr>
+                            <td class="txt">Номер плавки:</td>
+                            <td class="con">001</td>
+                        </tr>
+                        <tr>
+                            <td class="txt"><a href="ingots.html">Тип слитка:</a></td>
+                            <td><select id="select_ingot">
+                                <option selected="selected">МР1</option>
+                                <option>МР1,5</option>
+                                <option>МР2</option>
+                                <option>МР3,5</option>
+                                <option>МР2,7</option>
+                                <option>ВК4</option>
+                                <option>Р4,5</option>
+                                <option>МР7,5</option>
+                                <option>КС1,2</option>
+                                <option>КН295С</option>
+                                <option>КС45</option>
+                                <option>КС5,3</option>
+                                <option>КС7 (КС7,6)</option>
+                                <option>К75</option>
+                                <option>КС90</option>
+                                <option>КС65</option>
+                                <option>КС11</option>
+                                <option>Р0,4</option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Количество слитков:</td>
+                            <td><input type="text" id="count_ingot" title="Количество слитков в плавке. 1 - 8 шт." value=8></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Масса металла:</td>
+                            <td class="result" id="ingot_wight"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </fieldset>
+            <fieldset>
+                <LEGEND>Параметры розлива МР1:</LEGEND>
+                <table cellspacing="1px" cellpadding="10" border="0" width="400">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2">Наименование</th>
+                            <th colspan="2">Значение</th>
+                        </tr>
+                        <tr>
+                            <th>Мин.</th>
+                            <th>Макс.</th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Напонение литника</th>
+
+                        </tr>
+                        <tr>
+                            <td class="txt">Масса</td>
+                            <td class="result" colspan="2" id="start_wight"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Время</td>
+                            <td class="result" id="start_time_min"></td>
+                            <td class="result" id="start_time_max"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Наполнение тела слитка</th>
+                        </tr>
+                        <tr>
+                            <td class="txt">Масса</td>
+                            <td class="result" colspan="2" id="body_wight"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Время</td>
+                            <td class="result" id="body_time_min"></td>
+                            <td class="result" id="body_time_max"></td>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Наполнение головной части</th>
+
+                        </tr>
+                        <tr>
+                            <td class="txt">Масса</td>
+                            <td class="result" colspan="2" id="head_wight"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Время</td>
+                            <td class="result" id="head_time_min"></td>
+                            <td class="result" id="head_time_max"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <fieldset>
+                <LEGEND>Расчетные данные:</LEGEND>
+                <table cellspacing="1px" cellpadding="10" border="0" width="400">
+                    <tbody>
+                        <tr>
+                            <td class="txt">Скорость литника</td>
+                            <td id="start_speed_min" class="result"></td>
+                            <td id="start_speed_max" class="result"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Скорость тела</td>
+                            <td id="body_speed_min" class="result"></td>
+                            <td id="body_speed_max" class="result"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Скорость головы</td>
+                            <td id="head_speed_min" class="result"></td>
+                            <td id="head_speed_max" class="result"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Общее время</td>
+                            <td id="time_all_min" class="result"></td>
+                            <td id="time_all_max" class="result"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+
+            <fieldset>
+                <LEGEND>Параметры ковша:</LEGEND>
+                <table cellspacing="1px" cellpadding="10" border="0" width="400">
+                    <tbody>
+
+                        <tr>
+                            <td class="txt">Масса ковша c металлом</td>
+                            <td><input type="text" id="wight_ladle" title="Масса ковша c металлом 15 - 25 т." value="22500"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Масса ковша пустого</td>
+                            <td><input type="text" id="wight_empty_ladle" title="Масса пустого ковша 8,5 - 10 т." value="9400"></td>
+                        </tr>
+                        <tr>
+                            <td class="txt">Масса маталла в ковше</td>
+                            <td class="result" id="brutto_ladle"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </fieldset>
+            <!--</div>-->
+
+        </div>
+        <div id="svg_wight">
+
+        </div>
+
+        <div id="svg_speed">
+
+        </div>
+        <div class="sim">
+            <fieldset>
+                <LEGEND>Симулятор:</LEGEND>
+                <div id="radio">
+                    <label for="btn_start">Старт</label>
+                    <input type="radio" name="start_stop" id="btn_start" data-background-color="#0769AD" data-color="#7ACEF4" data-background-image="url(images/jquery.png)">
+                    <label for="btn_stop">Стоп</label>
+                    <input type="radio" name="start_stop" id="btn_stop" data-background-color="#B24926" data-color="#FAA523" data-background-image="url(images/jquery-ui.png)" checked>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <LEGEND>Шибер:</LEGEND>
+
+                <div id="gate_slider">
+                    <div id="custom-handle" class="ui-slider-handle"></div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <LEGEND>Вес:</LEGEND>
+                <div id="ledWight"></div>
+            </fieldset>
+            <fieldset>
+                <LEGEND>Скорость:</LEGEND>
+
+                <div id="ledSpeed"></div>
+            </fieldset>
+            <fieldset>
+                <LEGEND>Время:</LEGEND>
+
+                <div id="ledTime"></div>
+            </fieldset>
+            <fieldset>
+                <LEGEND>Ускорение симуляции:</LEGEND>
+                <div id="radio_speed_time">
+                    <label for="btn_1x">Х 1</label>
+                    <input type="radio" name="speed_time" id="btn_1x">
+                    <label for="btn_2x">Х 2</label>
+                    <input type="radio" name="speed_time" id="btn_2x" checked>
+                    <label for="btn_5x">Х 5</label>
+                    <input type="radio" name="speed_time" id="btn_5x" checked>
+                    <label for="btn_10x">Х 10</label>
+                    <input type="radio" name="speed_time" id="btn_10x">
+                    <label for="btn_100x">Х 100</label>
+                    <input type="radio" name="speed_time" id="btn_100x">
+                </div>
+            </fieldset>
+            <button class="ui-button ui-widget ui-corner-all" id="clear">Очистить.</button>
+            <fieldset>
+                <LEGEND>Графики:</LEGEND>
+                <div id="sim_graph_select">
+                    <label for="g_s_s">График веса</label>
+                    <input type="radio" name="sim_graph" id="g_s_w" checked>
+                    <label for="g_s_s">График скорости</label>
+                    <input type="radio" name="sim_graph" id="g_s_s">
+
+                </div>
+            </fieldset>
+        </div>
+        <div id="svg_sim_speed"></div>
+        <div id="svg_sim_wight"></div>
+
+        <div class="footer"> Версия 0.3.8 Pre alfa SRC - <a href="https://github.com/Viktorych/Surs_st">GitHub</a> &copy; Rudenko O.V.</div>
+
+    </div>
+    <!-- .wrapper -->
+
+</body>
+
+
+</html>
